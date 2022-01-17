@@ -13,6 +13,6 @@ git init
 git add -A
 git commit -m 'deploy'
 
-git push -f git@github.com:lne0nl/mapping-of-isaac.git main:gh-pages
+git push -f git@github.com:lne0nl/mapping-of-isaac.git master:gh-pages
 
 cd -
