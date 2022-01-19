@@ -5,8 +5,6 @@
       :id="room.id"
       :key="room.id"
       :type="room.type"
-      :x="room.x"
-      :y="room.y"
       :obstacles="room.obstacles"
       @click="getActiveElement" />
     <Types v-if="showTypes" />

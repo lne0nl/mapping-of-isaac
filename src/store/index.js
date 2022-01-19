@@ -32,6 +32,7 @@ export default createStore({
     },
     REMOVE_TYPE(state) {
       state.rooms[state.activeElement].type = '';
+      state.rooms[state.activeElement].obstacles = [];
     },
     RAZ(state) {
       state.rooms.forEach((room, index) => {
