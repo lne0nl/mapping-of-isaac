@@ -7,6 +7,7 @@
       :type="room.type"
       :x="room.x"
       :y="room.y"
+      :obstacles="room.obstacles"
       @click="getActiveElement" />
     <Types v-if="showTypes" />
   </div>
@@ -23,11 +24,6 @@ import Types from './components/Types.vue';
 export default {
   name: 'App',
   components: { Room, Types },
-  data() {
-    return {
-      numberOfRooms: 144,
-    };
-  },
   methods: {
     raz() {
       this.$store.commit('RAZ');

@@ -6,7 +6,7 @@ let y = 0;
 
 for (let i = 0; i < 144; i += 1) {
   rooms.push({
-    id: i, type: i === 66 ? 'empty' : '', x, y,
+    id: i, type: i === 66 ? 'empty' : '', x, y, obstacles: [],
   });
   x = x === 11 ? 0 : x += 1;
   if (x === 0) y += 1;
@@ -15,12 +15,16 @@ for (let i = 0; i < 144; i += 1) {
 export default createStore({
   state: {
     showTypes: false,
+    showObstacles: false,
     activeElement: null,
     rooms,
   },
   mutations: {
     TOGGLE_TYPES(state, activeElementId) {
-      if (activeElementId) state.activeElement = activeElementId;
+      if (activeElementId) {
+        state.activeElement = activeElementId;
+        state.showObstacles = !!state.rooms[activeElementId].type;
+      }
       state.showTypes = !state.showTypes;
     },
     CHANGE_TYPE(state, newType) {
@@ -33,7 +37,11 @@ export default createStore({
       state.rooms.forEach((room, index) => {
         const roomToEmpty = room;
         roomToEmpty.type = index === 66 ? 'empty' : '';
+        roomToEmpty.obstacles = [];
       });
+    },
+    ADD_OBSTACLES(state, obstacles) {
+      state.rooms[state.activeElement].obstacles = obstacles;
     },
     TEST_SECRET(state) {
       const secretRooms = [];
@@ -60,10 +68,30 @@ export default createStore({
 
         let validRoomCount = 0;
 
-        if (topRoom[0] && topRoom[0].type && topRoom[0].type !== 'boss') validRoomCount += 1;
-        if (rightRoom[0] && rightRoom[0].type && rightRoom[0].type !== 'boss') validRoomCount += 1;
-        if (bottomRoom[0] && bottomRoom[0].type && bottomRoom[0].type !== 'boss') validRoomCount += 1;
-        if (leftRoom[0] && leftRoom[0].type && leftRoom[0].type !== 'boss') validRoomCount += 1;
+        if (topRoom[0]
+          && topRoom[0].type
+          && topRoom[0].type !== 'boss'
+          && topRoom[0].type !== 'corridor_v'
+          && topRoom[0].type !== 'corridor_h'
+          && !topRoom[0].obstacles.includes('bottom')) validRoomCount += 1;
+        if (rightRoom[0]
+          && rightRoom[0].type
+          && rightRoom[0].type !== 'boss'
+          && rightRoom[0].type !== 'corridor_v'
+          && rightRoom[0].type !== 'corridor_h'
+          && !rightRoom[0].obstacles.includes('left')) validRoomCount += 1;
+        if (bottomRoom[0]
+          && bottomRoom[0].type
+          && bottomRoom[0].type !== 'boss'
+          && bottomRoom[0].type !== 'corridor_v'
+          && bottomRoom[0].type !== 'corridor_h'
+          && !bottomRoom[0].obstacles.includes('top')) validRoomCount += 1;
+        if (leftRoom[0]
+          && leftRoom[0].type
+          && leftRoom[0].type !== 'boss'
+          && leftRoom[0].type !== 'corridor_v'
+          && leftRoom[0].type !== 'corridor_h'
+          && !leftRoom[0].obstacles.includes('right')) validRoomCount += 1;
 
         if (validRoomCount >= 3) secretRooms.push(room.id);
       });
