@@ -46,6 +46,7 @@ export default createStore({
     },
     TEST_SECRET(state) {
       const secretRooms = [];
+      const jockerSecretRooms = [];
 
       state.rooms.forEach((room) => {
         if (room.type === 'secret') state.rooms[room.id].type = '';
@@ -75,32 +76,44 @@ export default createStore({
           && topRoom[0].type !== 'boss'
           && topRoom[0].type !== 'corridor_v'
           && topRoom[0].type !== 'corridor_h'
+          && topRoom[0].type !== 'secret'
           && !topRoom[0].obstacles.includes('bottom')) validRoomCount += 1;
         if (rightRoom[0]
           && rightRoom[0].type
           && rightRoom[0].type !== 'boss'
           && rightRoom[0].type !== 'corridor_v'
           && rightRoom[0].type !== 'corridor_h'
+          && rightRoom[0].type !== 'secret'
           && !rightRoom[0].obstacles.includes('left')) validRoomCount += 1;
         if (bottomRoom[0]
           && bottomRoom[0].type
           && bottomRoom[0].type !== 'boss'
           && bottomRoom[0].type !== 'corridor_v'
           && bottomRoom[0].type !== 'corridor_h'
+          && bottomRoom[0].type !== 'secret'
           && !bottomRoom[0].obstacles.includes('top')) validRoomCount += 1;
         if (leftRoom[0]
           && leftRoom[0].type
           && leftRoom[0].type !== 'boss'
           && leftRoom[0].type !== 'corridor_v'
           && leftRoom[0].type !== 'corridor_h'
+          && leftRoom[0].type !== 'secret'
           && !leftRoom[0].obstacles.includes('right')) validRoomCount += 1;
 
         if (validRoomCount >= 3) secretRooms.push(room.id);
+        if (validRoomCount === 2) jockerSecretRooms.push(room.id);
       });
 
-      secretRooms.forEach((roomId) => {
-        state.rooms[roomId].type = 'secret';
-      });
+      if (!secretRooms.length && !jockerSecretRooms.length) return;
+      if (secretRooms.length) {
+        secretRooms.forEach((roomId) => {
+          state.rooms[roomId].type = 'secret';
+        });
+      } else if (jockerSecretRooms.length) {
+        jockerSecretRooms.forEach((roomId) => {
+          state.rooms[roomId].type = 'secret';
+        });
+      }
     },
   },
 });
