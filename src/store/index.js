@@ -48,6 +48,7 @@ export default createStore({
       const secretRooms = [];
 
       state.rooms.forEach((room) => {
+        if (room.type === 'secret') state.rooms[room.id].type = '';
         if (room.type) return;
 
         const xCoordinate = room.x;
