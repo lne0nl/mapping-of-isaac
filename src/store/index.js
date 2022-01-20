@@ -71,6 +71,11 @@ export default createStore({
 
         let validRoomCount = 0;
 
+        if (topRoom[0] && topRoom[0].obstacles.includes('bottom')) return;
+        if (rightRoom[0] && rightRoom[0].obstacles.includes('left')) return;
+        if (bottomRoom[0] && bottomRoom[0].obstacles.includes('top')) return;
+        if (leftRoom[0] && leftRoom[0].obstacles.includes('right')) return;
+
         if (topRoom[0]
           && topRoom[0].type
           && topRoom[0].type !== 'boss'
