@@ -71,39 +71,31 @@ export default createStore({
 
         let validRoomCount = 0;
 
-        if (topRoom[0] && topRoom[0].obstacles.includes('bottom')) return;
-        if (rightRoom[0] && rightRoom[0].obstacles.includes('left')) return;
-        if (bottomRoom[0] && bottomRoom[0].obstacles.includes('top')) return;
-        if (leftRoom[0] && leftRoom[0].obstacles.includes('right')) return;
+        if (topRoom[0] && (topRoom[0].obstacles.includes('bottom') || topRoom[0].type === 'boss')) return;
+        if (rightRoom[0] && (rightRoom[0].obstacles.includes('left') || rightRoom[0].type === 'boss')) return;
+        if (bottomRoom[0] && (bottomRoom[0].obstacles.includes('top') || bottomRoom[0].type === 'boss')) return;
+        if (leftRoom[0] && (leftRoom[0].obstacles.includes('right') || leftRoom[0].type === 'boss')) return;
 
         if (topRoom[0]
           && topRoom[0].type
-          && topRoom[0].type !== 'boss'
           && topRoom[0].type !== 'corridor_v'
           && topRoom[0].type !== 'corridor_h'
-          && topRoom[0].type !== 'secret'
-          && !topRoom[0].obstacles.includes('bottom')) validRoomCount += 1;
+          && topRoom[0].type !== 'secret') validRoomCount += 1;
         if (rightRoom[0]
           && rightRoom[0].type
-          && rightRoom[0].type !== 'boss'
           && rightRoom[0].type !== 'corridor_v'
           && rightRoom[0].type !== 'corridor_h'
-          && rightRoom[0].type !== 'secret'
-          && !rightRoom[0].obstacles.includes('left')) validRoomCount += 1;
+          && rightRoom[0].type !== 'secret') validRoomCount += 1;
         if (bottomRoom[0]
           && bottomRoom[0].type
-          && bottomRoom[0].type !== 'boss'
           && bottomRoom[0].type !== 'corridor_v'
           && bottomRoom[0].type !== 'corridor_h'
-          && bottomRoom[0].type !== 'secret'
-          && !bottomRoom[0].obstacles.includes('top')) validRoomCount += 1;
+          && bottomRoom[0].type !== 'secret') validRoomCount += 1;
         if (leftRoom[0]
           && leftRoom[0].type
-          && leftRoom[0].type !== 'boss'
           && leftRoom[0].type !== 'corridor_v'
           && leftRoom[0].type !== 'corridor_h'
-          && leftRoom[0].type !== 'secret'
-          && !leftRoom[0].obstacles.includes('right')) validRoomCount += 1;
+          && leftRoom[0].type !== 'secret') validRoomCount += 1;
 
         if (validRoomCount >= 3) secretRooms.push(room.id);
         if (validRoomCount === 2) jockerSecretRooms.push(room.id);
