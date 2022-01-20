@@ -1,22 +1,22 @@
 <template>
-  <div class="room" :id="id" v-memo="[type, obstacles]" :data-type="type">
-    <img v-if="type" :src="require(`@/assets/rooms/${type}.png`)" />
-    <div class="obstacles" v-if="obstacles">
-      <div v-for="obstacle in obstacles" :key="obstacle" :class="`obstacle obstacle-${obstacle}`">
+  <div class="room" :id="props.id" v-memo="[props.type, props.obstacles]" :data-type="props.type">
+    <img v-if="props.type" :src="require(`@/assets/rooms/${props.type}.png`)" />
+    <div class="obstacles" v-if="props.obstacles">
+      <div v-for="obstacle in props.obstacles"
+        :key="obstacle" :class="`obstacle obstacle-${obstacle}`">
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Room',
-  props: {
-    id: Number,
-    type: String,
-    obstacles: Array,
-  },
-};
+<script setup>
+import { defineProps } from 'vue';
+
+const props = defineProps({
+  id: Number,
+  type: String,
+  obstacles: Array,
+});
 </script>
 
 <style scoped lang="scss">

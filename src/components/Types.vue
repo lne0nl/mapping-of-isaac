@@ -29,32 +29,32 @@
         :src="require('@/assets/rooms/corridor_v.png')" data-type="corridor_v">
       <div v-if="showObstacles" class="obstacles">
         <h3>Obstacles</h3>
-        <div @click="AddObstacles" class="obstacle" data-obstacle=""></div>
-        <div @click="AddObstacles" class="obstacle obstacle-top" data-obstacle="top"></div>
-        <div @click="AddObstacles" class="obstacle obstacle-right" data-obstacle="right"></div>
-        <div @click="AddObstacles" class="obstacle obstacle-bottom" data-obstacle="bottom"></div>
-        <div @click="AddObstacles" class="obstacle obstacle-left" data-obstacle="left"></div>
-        <div @click="AddObstacles" class="obstacle obstacle-top obstacle-bottom"
+        <div @click="addObstacles" class="obstacle" data-obstacle=""></div>
+        <div @click="addObstacles" class="obstacle obstacle-top" data-obstacle="top"></div>
+        <div @click="addObstacles" class="obstacle obstacle-right" data-obstacle="right"></div>
+        <div @click="addObstacles" class="obstacle obstacle-bottom" data-obstacle="bottom"></div>
+        <div @click="addObstacles" class="obstacle obstacle-left" data-obstacle="left"></div>
+        <div @click="addObstacles" class="obstacle obstacle-top obstacle-bottom"
           data-obstacle="top, bottom"></div>
-        <div @click="AddObstacles" class="obstacle obstacle-right obstacle-left"
+        <div @click="addObstacles" class="obstacle obstacle-right obstacle-left"
           data-obstacle="right, left"></div>
-        <div @click="AddObstacles" class="obstacle obstacle-top obstacle-right"
+        <div @click="addObstacles" class="obstacle obstacle-top obstacle-right"
           data-obstacle="top, right"></div>
-        <div @click="AddObstacles" class="obstacle obstacle-right obstacle-bottom"
+        <div @click="addObstacles" class="obstacle obstacle-right obstacle-bottom"
           data-obstacle="right, bottom"></div>
-        <div @click="AddObstacles" class="obstacle obstacle-bottom obstacle-left"
+        <div @click="addObstacles" class="obstacle obstacle-bottom obstacle-left"
           data-obstacle="bottom, left"></div>
-        <div @click="AddObstacles" class="obstacle obstacle-left obstacle-top"
+        <div @click="addObstacles" class="obstacle obstacle-left obstacle-top"
           data-obstacle="left, top"></div>
-        <div @click="AddObstacles" class="obstacle obstacle-left obstacle-top obstacle-right"
+        <div @click="addObstacles" class="obstacle obstacle-left obstacle-top obstacle-right"
           data-obstacle="left, top, right"></div>
-        <div @click="AddObstacles" class="obstacle obstacle-top obstacle-right obstacle-bottom"
+        <div @click="addObstacles" class="obstacle obstacle-top obstacle-right obstacle-bottom"
           data-obstacle="top, right, bottom"></div>
-        <div @click="AddObstacles" class="obstacle obstacle-left obstacle-bottom obstacle-right"
+        <div @click="addObstacles" class="obstacle obstacle-left obstacle-bottom obstacle-right"
           data-obstacle="left, bottom, right"></div>
-        <div @click="AddObstacles" class="obstacle obstacle-top obstacle-left obstacle-bottom"
+        <div @click="addObstacles" class="obstacle obstacle-top obstacle-left obstacle-bottom"
           data-obstacle="top, left, bottom"></div>
-        <div @click="AddObstacles"
+        <div @click="addObstacles"
           class="obstacle obstacle-top obstacle-right obstacle-bottom obstacle-left"
           data-obstacle="top, right, bottom, left"></div>
       </div>
@@ -62,37 +62,27 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Types',
-  methods: {
-    closeTypes() {
-      this.$store.commit('TOGGLE_TYPES');
-    },
-    selectType(e) {
-      const { target } = e;
-      this.$store.commit('CHANGE_TYPE', target.dataset.type);
-      this.closeTypes();
-    },
-    removeType() {
-      this.$store.commit('REMOVE_TYPE');
-      this.closeTypes();
-    },
-    AddObstacles(e) {
-      const { target } = e;
-      let obstacles = [];
-      if (target.dataset.obstacle) obstacles = target.dataset.obstacle.split(',').map((value) => value.trim());
-      this.$store.commit('ADD_OBSTACLES', obstacles);
-      this.closeTypes();
-    },
-  },
-  computed: {
-    showObstacles() {
-      return this.$store.state.showObstacles;
-    },
-  },
-};
+<script setup>
+import { useStore } from 'vuex';
 
+const store = useStore();
+const { showObstacles } = store.state;
+
+const closeTypes = () => store.commit('TOGGLE_TYPES');
+const selectType = (e) => {
+  store.commit('CHANGE_TYPE', e.target.dataset.type);
+  closeTypes();
+};
+const removeType = () => {
+  store.commit('REMOVE_TYPE');
+  closeTypes();
+};
+const addObstacles = (e) => {
+  let obstacles = [];
+  if (e.target.dataset.obstacle) obstacles = e.target.dataset.obstacle.split(',').map((value) => value.trim());
+  store.commit('ADD_OBSTACLES', obstacles);
+  closeTypes();
+};
 </script>
 
 <style scoped lang="scss">

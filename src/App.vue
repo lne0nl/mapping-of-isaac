@@ -15,32 +15,23 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { useStore } from 'vuex';
 import Room from './components/Room.vue';
 import Types from './components/Types.vue';
 
+const store = useStore();
+const { rooms } = store.state;
+
+const raz = () => store.commit('RAZ');
+const toggleTypes = (activeElementId) => store.commit('TOGGLE_TYPES', activeElementId);
+const getActiveElement = (e) => toggleTypes(e.target.id);
+const checkSecretRooms = () => store.commit('TEST_SECRET');
+</script>
+
+<script>
 export default {
-  name: 'App',
-  components: { Room, Types },
-  methods: {
-    raz() {
-      this.$store.commit('RAZ');
-    },
-    getActiveElement(e) {
-      const { target } = e;
-      this.toggleTypes(target.id);
-    },
-    toggleTypes(activeElementId) {
-      this.$store.commit('TOGGLE_TYPES', activeElementId);
-    },
-    checkSecretRooms() {
-      this.$store.commit('TEST_SECRET');
-    },
-  },
   computed: {
-    rooms() {
-      return this.$store.state.rooms;
-    },
     showTypes() {
       return this.$store.state.showTypes;
     },
