@@ -14,5 +14,5 @@ jobs:
         run: npm install
       - name: Cypress run
         uses: cypress-io/github-action@v2
-        width:
+        with:
           server: npm run serve
