@@ -1,4 +1,3 @@
-# mapping-of-isaac
 <div align="center">
     <img src="https://raw.githubusercontent.com/lne0nl/mapping-of-isaac/master/src/assets/logo.png">
 </div>
