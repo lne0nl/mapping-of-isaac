@@ -1,0 +1,12 @@
+{
+  "baseUrl": "http://localhost:8080/",
+  "viewportWidth": 1280,
+  "viewportHeight": 720,
+  "video": false,
+  "chromeWebSecurity": false,
+  "env": {
+    "HOSTNAME": "localhost",
+    "BASENAME": "mapping of isaac",
+    "URL": "http://localhost:8080/"
+  }
+}

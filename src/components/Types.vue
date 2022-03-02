@@ -4,29 +4,41 @@
     <div class="container">
       <button @click="removeType">Remove Type</button>
       <h3>Special rooms</h3>
-      <img @click="selectType" :src="require('@/assets/rooms/arcade.png')" data-type="arcade">
-      <img @click="selectType" :src="require('@/assets/rooms/boss.png')" data-type="boss">
       <img @click="selectType"
-        :src="require('@/assets/rooms/challenge.png')" data-type="challenge">
-      <img @click="selectType" :src="require('@/assets/rooms/curse.png')" data-type="curse">
-      <img @click="selectType" :src="require('@/assets/rooms/dice.png')" data-type="dice">
-      <img @click="selectType" :src="require('@/assets/rooms/library.png')" data-type="library">
-      <img @click="selectType" :src="require('@/assets/rooms/miniboss.png')" data-type="miniboss">
+        :src="require('@/assets/rooms/arcade.png')" data-type="arcade" data-cy="arcade">
       <img @click="selectType"
-        :src="require('@/assets/rooms/planetarium.png')" data-type="planetarium">
+        :src="require('@/assets/rooms/boss.png')" data-type="boss" data-cy="boss">
       <img @click="selectType"
-        :src="require('@/assets/rooms/sacrifice.png')" data-type="sacrifice">
-      <img @click="selectType" :src="require('@/assets/rooms/shop.png')" data-type="shop">
-      <img @click="selectType" :src="require('@/assets/rooms/treasure.png')" data-type="treasure">
-      <img @click="selectType" :src="require('@/assets/rooms/vault.png')" data-type="vault">
+        :src="require('@/assets/rooms/challenge.png')" data-type="challenge" data-cy="challenge">
       <img @click="selectType"
-        :src="require('@/assets/rooms/superchallenge.png')" data-type="superchallenge">
+        :src="require('@/assets/rooms/curse.png')" data-type="curse" data-cy="curse">
+      <img @click="selectType"
+        :src="require('@/assets/rooms/dice.png')" data-type="dice" data-cy="dice">
+      <img @click="selectType"
+        :src="require('@/assets/rooms/library.png')" data-type="library" data-cy="library">
+      <img @click="selectType"
+        :src="require('@/assets/rooms/miniboss.png')" data-type="miniboss" data-cy="miniboss">
+      <img @click="selectType"
+        :src="require('@/assets/rooms/planetarium.png')"
+        data-type="planetarium" data-cy="planetarium">
+      <img @click="selectType"
+        :src="require('@/assets/rooms/sacrifice.png')" data-type="sacrifice" data-cy="sacrifice">
+      <img @click="selectType"
+        :src="require('@/assets/rooms/shop.png')" data-type="shop" data-cy="shop">
+      <img @click="selectType"
+        :src="require('@/assets/rooms/treasure.png')" data-type="treasure" data-cy="treasure">
+      <img @click="selectType"
+        :src="require('@/assets/rooms/vault.png')" data-type="vault" data-cy="vault">
+      <img @click="selectType"
+        :src="require('@/assets/rooms/superchallenge.png')"
+        data-type="superchallenge" data-cy="superchallenge">
       <h3>Normal rooms</h3>
-      <img @click="selectType" :src="require('@/assets/rooms/empty.png')" data-type="empty">
       <img @click="selectType"
-        :src="require('@/assets/rooms/corridor_h.png')" data-type="corridor_h">
+        :src="require('@/assets/rooms/empty.png')" data-type="empty" data-cy="empty">
       <img @click="selectType"
-        :src="require('@/assets/rooms/corridor_v.png')" data-type="corridor_v">
+        :src="require('@/assets/rooms/corridor_h.png')" data-type="corridor_h" data-cy="corridor_h">
+      <img @click="selectType"
+        :src="require('@/assets/rooms/corridor_v.png')" data-type="corridor_v" data-cy="corridor_v">
       <div v-if="showObstacles" class="obstacles">
         <h3>Obstacles</h3>
         <div @click="AddObstacles" class="obstacle" data-obstacle=""></div>

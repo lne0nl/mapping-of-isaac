@@ -1,7 +1,7 @@
 <template>
   <div class="room" :id="id" v-memo="[type, obstacles]" :data-type="type">
     <img v-if="type" :src="require(`@/assets/rooms/${type}.png`)" />
-    <div class="obstacles" v-if="obstacles">
+    <div class="obstacles" v-if="obstacles.length">
       <div v-for="obstacle in obstacles" :key="obstacle" :class="`obstacle obstacle-${obstacle}`">
       </div>
     </div>

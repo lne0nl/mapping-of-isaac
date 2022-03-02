@@ -1,16 +1,19 @@
 {
   "name": "mapping-of-isaac",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "private": false,
   "author": "Raphaël Grand <lne0nl@gmail.com>",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "sh deploy.sh"
+    "deploy": "sh deploy.sh",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "cypress": "^9.5.1",
     "vue": "^3.0.0",
     "vuex": "^4.0.2"
   },
