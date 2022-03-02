@@ -18,6 +18,6 @@ describe('Rooms Management', () => {
     cy.get('#79').click();
     cy.get('[data-cy="empty"]').click();
     cy.get('.actions > :nth-child(2)').click();
-    cy.get('#67').find('img').should('have.attr', 'src');
+    cy.get('#68').find('img').should('have.attr', 'src');
   });
 });
