@@ -1,5 +1,7 @@
 name: Cypress tests
+
 on: [push]
+
 jobs:
   cypress-run:
     runs-on: ubuntu-20.04
@@ -15,4 +17,4 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          server: npm run serve
+          start: npm run serve
