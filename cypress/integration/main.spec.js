@@ -31,4 +31,14 @@ describe('Rooms Management', () => {
     cy.get('.actions > :nth-child(2)').click();
     cy.get('#67').find('img').should('not.exist');
   });
+  it('Check boss room', () => {
+    cy.get('#78').click();
+    cy.get('[data-cy="empty"]').click();
+    cy.get('#79').click();
+    cy.get('[data-cy="empty"]').click();
+    cy.get('#79').click();
+    cy.get('[data-cy="boss"]').click();
+    cy.get('.actions > :nth-child(2)').click();
+    cy.get('#67').find('img').should('not.exist');
+  })
 });
