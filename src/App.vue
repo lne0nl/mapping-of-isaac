@@ -10,7 +10,10 @@
     <Types v-if="showTypes" />
   </div>
   <div class="actions">
-    <button class="button" @click="raz">Begin again</button>
+    <button title="Destroy floor" class="button" @click="raz">
+      <img src="./assets/bomb.png" alt="Destroy floor"><br>
+      Destroy the floor
+    </button>
   </div>
 </template>
 
@@ -75,7 +78,7 @@ h1, h2 {
 }
 .button {
   padding: 5px;
-  border: 1px solid black;
+  border: none;
   background-color: transparent;
   cursor: pointer;
 }
