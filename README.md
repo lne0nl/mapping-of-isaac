@@ -4,11 +4,10 @@
     <img src="https://raw.githubusercontent.com/lne0nl/mapping-of-isaac/master/src/assets/logo-rm.png">
 </div>
 
-
-
-<p><b>The Mapping of Isaac</b> is a simple website developped in Vue.js for the game <b>Binding of Isaac</b>.
-It allows you to place the rooms on the map of the floor you are playing, then calculate the probability for the secret rooms placements.
-</p>
+<p>
+    <b><a href="https://lne0nl.github.io/mapping-of-isaac/">The Mapping of Isaac</a></b> is a simple website developped in Vue.js for the game <b>Binding of Isaac</b>.
+    It allows you to place the rooms on the map of the floor you are playing, then calculate the probability for the secret rooms placements.
+    </p>
 
 ## Project setup
 ```
@@ -39,5 +38,12 @@ npm run cypress:run
 ```
 npm run deploy
 ```
+<div align="center">
+    <img src="https://raw.githubusercontent.com/lne0nl/mapping-of-isaac/master/src/assets/isaac.png" width="100">
+</div>
 
-<img src="https://raw.githubusercontent.com/lne0nl/mapping-of-isaac/master/src/assets/isaac.png">
+### TODO
+
+- [] Build the map gradually when user add a room
+- [] Calculate secret room position when user add a room
+- [] Implement super secret room calculation
