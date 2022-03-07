@@ -84,10 +84,12 @@ export default {
     selectType(e) {
       const { target } = e;
       this.$store.commit('CHANGE_TYPE', target.dataset.type);
+      this.$store.commit('TEST_SECRET');
       this.closeTypes();
     },
     removeType() {
       this.$store.commit('REMOVE_TYPE');
+      this.$store.commit('TEST_SECRET');
       this.closeTypes();
     },
     AddObstacles(e) {
@@ -95,6 +97,7 @@ export default {
       let obstacles = [];
       if (target.dataset.obstacle) obstacles = target.dataset.obstacle.split(',').map((value) => value.trim());
       this.$store.commit('ADD_OBSTACLES', obstacles);
+      this.$store.commit('TEST_SECRET');
       this.closeTypes();
     },
   },
