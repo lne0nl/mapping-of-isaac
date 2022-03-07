@@ -44,6 +44,6 @@ npm run deploy
 
 ### TODO
 
-- [] Build the map gradually when user add a room
-- [] Calculate secret room position when user add a room
-- [] Implement super secret room calculation
+- [ ] Build the map gradually when user add a room
+- [ ] Calculate secret room position when user add a room
+- [ ] Implement super secret room calculation
