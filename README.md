@@ -2,6 +2,9 @@
     <img src="https://raw.githubusercontent.com/lne0nl/mapping-of-isaac/master/src/assets/logo-rm.png">
 </div>
 
+![cypress tests](https://github.com/lne0nl/mapping-of-isaac/actions/workflows/github-actions-init.yml/badge.svg?branch=master)
+
+
 <p><b>The Mapping of Isaac</b> is a simple website developped in Vue.js for the game <b>Binding of Isaac</b>.
 It allows you to place the rooms on the map of the floor you are playing, then calculate the probability for the secret rooms placements.
 </p>
