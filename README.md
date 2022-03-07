@@ -1,8 +1,9 @@
+![cypress](https://github.com/lne0nl/mapping-of-isaac/actions/workflows/github-actions-init.yml/badge.svg?branch=master)
+
 <div align="center">
     <img src="https://raw.githubusercontent.com/lne0nl/mapping-of-isaac/master/src/assets/logo-rm.png">
 </div>
 
-![cypress tests](https://github.com/lne0nl/mapping-of-isaac/actions/workflows/github-actions-init.yml/badge.svg?branch=master)
 
 
 <p><b>The Mapping of Isaac</b> is a simple website developped in Vue.js for the game <b>Binding of Isaac</b>.
