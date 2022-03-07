@@ -39,3 +39,5 @@ npm run cypress:run
 ```
 npm run deploy
 ```
+
+<img src="https://raw.githubusercontent.com/lne0nl/mapping-of-isaac/master/src/assets/isaac.png">
