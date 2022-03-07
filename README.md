@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://raw.githubusercontent.com/lne0nl/mapping-of-isaac/master/src/assets/logo.png">
+    <img src="https://raw.githubusercontent.com/lne0nl/mapping-of-isaac/master/src/assets/logo-rm.png">
 </div>
 
 <p><b>The Mapping of Isaac</b> is a simple website developped in Vue.js for the game <b>Binding of Isaac</b>.
