@@ -9,7 +9,6 @@ describe('Secret rooms logic', () => {
     cy.get('[data-cy="empty"]').click();
     cy.get('#79').click();
     cy.get('[data-cy="empty"]').click();
-    cy.get('.actions > :nth-child(2)').click();
     cy.get('#67').find('img').should('exist');
   });
 
@@ -20,7 +19,6 @@ describe('Secret rooms logic', () => {
     cy.get('[data-cy="empty"]').click();
     cy.get('#79').click();
     cy.get('[data-obstacle="top"]').click();
-    cy.get('.actions > :nth-child(2)').click();
     cy.get('#67').find('img').should('not.exist');
   });
 
@@ -31,7 +29,6 @@ describe('Secret rooms logic', () => {
     cy.get('[data-cy="empty"]').click();
     cy.get('#79').click();
     cy.get('[data-cy="boss"]').click();
-    cy.get('.actions > :nth-child(2)').click();
     cy.get('#67').find('img').should('not.exist');
   });
 
@@ -51,7 +48,6 @@ describe('Secret rooms logic', () => {
     cy.get('[data-cy="empty"]').click();
     cy.get('#79').click();
     cy.get('[data-cy="empty"]').click();
-    cy.get('.actions > :nth-child(2)').click();
     cy.get('#65').find('img').should('not.exist');
     cy.get('#67').find('img').should('not.exist');
     cy.get('#78').find('img').should('exist');

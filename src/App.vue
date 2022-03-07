@@ -11,7 +11,6 @@
   </div>
   <div class="actions">
     <button class="button" @click="raz">Begin again</button>
-    <button class="button" @click="checkSecretRooms">Show me the secret rooms</button>
   </div>
 </template>
 
@@ -32,9 +31,6 @@ export default {
     },
     toggleTypes(activeElementId) {
       this.$store.commit('TOGGLE_TYPES', activeElementId);
-    },
-    checkSecretRooms() {
-      this.$store.commit('TEST_SECRET');
     },
   },
   computed: {
