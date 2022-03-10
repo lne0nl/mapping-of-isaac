@@ -85,6 +85,7 @@ export default {
       const { target } = e;
       this.$store.commit('CHANGE_TYPE', target.dataset.type);
       this.$store.commit('TEST_SECRET');
+      this.$store.commit('TEST_SUPER', target.dataset.type);
       this.closeTypes();
     },
     removeType() {

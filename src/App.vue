@@ -81,5 +81,13 @@ h1, h2 {
   border: none;
   background-color: transparent;
   cursor: pointer;
+
+  & > img {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  &:hover > img, &:focus > img {
+    transform: scale(1.08);
+  }
 }
 </style>
