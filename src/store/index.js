@@ -98,30 +98,55 @@ export default createStore({
         room.type = '';
       });
 
+      const adjacentRooms = [];
+
+      // @TODO do something in case an entry is empty.
       // Get nearest room.
       const topRoom = state.rooms[bossRoomId - 12];
       const rightRoom = state.rooms[bossRoomId + 1];
       const bottomRoom = state.rooms[bossRoomId + 12];
       const leftRoom = state.rooms[bossRoomId - 1];
 
-      let adjacentRoom = {};
+      if (topRoom.type) adjacentRooms.push(state.rooms[topRoom.id]);
+      if (rightRoom.type) adjacentRooms.push(state.rooms[rightRoom.id]);
+      if (bottomRoom.type) adjacentRooms.push(state.rooms[bottomRoom.id]);
+      if (leftRoom.type) adjacentRooms.push(state.rooms[leftRoom.id]);
 
-      if (topRoom.type) adjacentRoom = state.rooms[topRoom.id];
-      if (rightRoom.type) adjacentRoom = state.rooms[rightRoom.id];
-      if (bottomRoom.type) adjacentRoom = state.rooms[bottomRoom.id];
-      if (leftRoom.type) adjacentRoom = state.rooms[leftRoom.id];
+      // Get second nearest room.
+      const secondTopRoom = state.rooms[adjacentRooms[0].id - 12];
+      const secondRightRoom = state.rooms[adjacentRooms[0].id + 1];
+      const secondBottomRoom = state.rooms[adjacentRooms[0].id + 12];
+      const secondLeftRoom = state.rooms[adjacentRooms[0].id - 1];
+
+      if (secondTopRoom.type && secondTopRoom.type !== 'boss' && secondTopRoom.type !== 'secret') adjacentRooms.push(state.rooms[secondTopRoom.id]);
+      if (secondRightRoom.type && secondRightRoom.type !== 'boss' && secondRightRoom.type !== 'secret') adjacentRooms.push(state.rooms[secondRightRoom.id]);
+      if (secondBottomRoom.type && secondBottomRoom.type !== 'boss' && secondBottomRoom.type !== 'secret') adjacentRooms.push(state.rooms[secondBottomRoom.id]);
+      if (secondLeftRoom.type && secondLeftRoom.type !== 'boss' && secondLeftRoom.type !== 'secret') adjacentRooms.push(state.rooms[secondLeftRoom.id]);
+
+      // Get third nearest room.
+      const thirdTopRoom = state.rooms[adjacentRooms[1].id - 12];
+      const thirdRightRoom = state.rooms[adjacentRooms[1].id + 1];
+      const thirdBottomRoom = state.rooms[adjacentRooms[1].id + 12];
+      const thirdLeftRoom = state.rooms[adjacentRooms[1].id - 1];
+
+      if (thirdTopRoom.type && thirdTopRoom.type !== 'boss' && thirdTopRoom.type !== 'secret') adjacentRooms.push(state.rooms[thirdTopRoom.id]);
+      if (thirdRightRoom.type && thirdRightRoom.type !== 'boss' && thirdRightRoom.type !== 'secret') adjacentRooms.push(state.rooms[thirdRightRoom.id]);
+      if (thirdBottomRoom.type && thirdBottomRoom.type !== 'boss' && thirdBottomRoom.type !== 'secret') adjacentRooms.push(state.rooms[thirdBottomRoom.id]);
+      if (thirdLeftRoom.type && thirdLeftRoom.type !== 'boss' && thirdLeftRoom.type !== 'secret') adjacentRooms.push(state.rooms[thirdLeftRoom.id]);
 
       const potentialSuper = [];
 
-      const topSecret = state.rooms[adjacentRoom.id - 12];
-      const rightSecret = state.rooms[adjacentRoom.id + 1];
-      const bottomSecret = state.rooms[adjacentRoom.id + 12];
-      const leftSecret = state.rooms[adjacentRoom.id - 1];
+      adjacentRooms.forEach((room) => {
+        const topSecret = state.rooms[room.id - 12];
+        const rightSecret = state.rooms[room.id + 1];
+        const bottomSecret = state.rooms[room.id + 12];
+        const leftSecret = state.rooms[room.id - 1];
 
-      if (!topSecret.type && !adjacentRoom.obstacles.includes('top')) potentialSuper.push({ room: topSecret, position: 'top' });
-      if (!rightSecret.type && !adjacentRoom.obstacles.includes('right')) potentialSuper.push({ room: rightSecret, position: 'right' });
-      if (!bottomSecret.type && !adjacentRoom.obstacles.includes('bottom')) potentialSuper.push({ room: bottomSecret, position: 'bottom' });
-      if (!leftSecret.type && !adjacentRoom.obstacles.includes('left')) potentialSuper.push({ room: leftSecret, position: 'left' });
+        if (!topSecret.type && !room.obstacles.includes('top')) potentialSuper.push({ room: topSecret, position: 'top' });
+        if (!rightSecret.type && !room.obstacles.includes('right')) potentialSuper.push({ room: rightSecret, position: 'right' });
+        if (!bottomSecret.type && !room.obstacles.includes('bottom')) potentialSuper.push({ room: bottomSecret, position: 'bottom' });
+        if (!leftSecret.type && !room.obstacles.includes('left')) potentialSuper.push({ room: leftSecret, position: 'left' });
+      });
 
       potentialSuper.forEach((superSecret) => {
         // Check if other adjacent rooms exists
@@ -132,16 +157,24 @@ export default createStore({
 
         switch (superSecret.position) {
           case 'top':
-            if (!topAdjacent.type && !rightAdjacent.type && !leftAdjacent.type) state.rooms[superSecret.room.id].type = 'super';
+            if ((!topAdjacent.type || topAdjacent.type === 'super')
+              && (!rightAdjacent.type || rightAdjacent.type === 'super')
+              && (!leftAdjacent.type || leftAdjacent.type === 'super')) state.rooms[superSecret.room.id].type = 'super';
             break;
           case 'right':
-            if (!topAdjacent.type && !rightAdjacent.type && !bottomAdjacent.type) state.rooms[superSecret.room.id].type = 'super';
+            if ((!topAdjacent.type || topAdjacent.type === 'super')
+              && (!rightAdjacent.type || rightAdjacent.type === 'super')
+              && (!bottomAdjacent.type || bottomAdjacent.type === 'super')) state.rooms[superSecret.room.id].type = 'super';
             break;
           case 'bottom':
-            if (!bottomAdjacent.type && !rightAdjacent.type && !leftAdjacent.type) state.rooms[superSecret.room.id].type = 'super';
+            if ((!bottomAdjacent.type || bottomAdjacent.type === 'super')
+              && (!rightAdjacent.type || rightAdjacent.type === 'super')
+              && (!leftAdjacent.type || leftAdjacent.type === 'super')) state.rooms[superSecret.room.id].type = 'super';
             break;
           case 'left':
-            if (!topAdjacent.type && !bottomAdjacent.type && !leftAdjacent.type) state.rooms[superSecret.room.id].type = 'super';
+            if ((!topAdjacent.type || topAdjacent.type === 'super')
+            && (!bottomAdjacent.type || bottomAdjacent.type === 'super')
+            && (!leftAdjacent.type || leftAdjacent.type === 'super')) state.rooms[superSecret.room.id].type = 'super';
             break;
           default:
         }
