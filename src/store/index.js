@@ -108,10 +108,16 @@ export default createStore({
         });
       }
     },
-    TEST_SUPER(state, type) {
-      if (type !== 'boss') return;
-      const bossRoomX = state.rooms[state.activeElement].x;
-      const bossRoomY = state.rooms[state.activeElement].y;
+    TEST_SUPER(state) {
+      const bossRoom = state.rooms.filter((elem) => elem.type === 'boss');
+      if (!bossRoom.length) return;
+      // RAZ super secret rooms.
+      state.rooms.filter((elem) => elem.type === 'super').forEach((room) => {
+        // eslint-disable-next-line no-param-reassign
+        room.type = '';
+      });
+      const bossRoomX = bossRoom[0].x;
+      const bossRoomY = bossRoom[0].y;
 
       const bossRoomCoordinates = { x: bossRoomX, y: bossRoomY };
 
@@ -137,6 +143,7 @@ export default createStore({
       const adjacentRoomCoordinates = { x: adjacentRoom.x, y: adjacentRoom.y };
 
       const potentialSuper = [];
+      // const superSecretRooms = [];
 
       const potentialSuperCoordinates = checkCoordinates(adjacentRoomCoordinates);
       const topSecret = state.rooms.filter((elem) => elem.x === potentialSuperCoordinates.top.x
@@ -150,13 +157,39 @@ export default createStore({
       const leftSecret = state.rooms.filter((elem) => elem.x === potentialSuperCoordinates.left.x
         && elem.y === potentialSuperCoordinates.left.y);
 
-      if (!topSecret[0].type && !adjacentRoom.obstacles.includes('top')) potentialSuper.push(topSecret[0]);
-      if (!rightSecret[0].type && !adjacentRoom.obstacles.includes('right')) potentialSuper.push(rightSecret[0]);
-      if (!bottomSecret[0].type && !adjacentRoom.obstacles.includes('bottom')) potentialSuper.push(bottomSecret[0]);
-      if (!leftSecret[0].type && !adjacentRoom.obstacles.includes('left')) potentialSuper.push(leftSecret[0]);
+      if (!topSecret[0].type && !adjacentRoom.obstacles.includes('top')) potentialSuper.push({ room: topSecret[0], position: 'top' });
+      if (!rightSecret[0].type && !adjacentRoom.obstacles.includes('right')) potentialSuper.push({ room: rightSecret[0], position: 'right' });
+      if (!bottomSecret[0].type && !adjacentRoom.obstacles.includes('bottom')) potentialSuper.push({ room: bottomSecret[0], position: 'bottom' });
+      if (!leftSecret[0].type && !adjacentRoom.obstacles.includes('left')) potentialSuper.push({ room: leftSecret[0], position: 'left' });
 
       potentialSuper.forEach((superSecret) => {
-        state.rooms[superSecret.id].type = 'super';
+        // Check if other adjacent rooms exists
+        const superCoordinates = { x: superSecret.room.x, y: superSecret.room.y };
+        const superAdjacentRooms = checkCoordinates(superCoordinates);
+        const topAdjacent = state.rooms.filter((elem) => elem.x === superAdjacentRooms.top.x
+          && elem.y === superAdjacentRooms.top.y);
+        const rightAdjacent = state.rooms.filter((elem) => elem.x === superAdjacentRooms.right.x
+          && elem.y === superAdjacentRooms.right.y);
+        const bottomAdjacent = state.rooms.filter((elem) => elem.x === superAdjacentRooms.bottom.x
+          && elem.y === superAdjacentRooms.bottom.y);
+        const leftAdjacent = state.rooms.filter((elem) => elem.x === superAdjacentRooms.left.x
+          && elem.y === superAdjacentRooms.left.y);
+
+        switch (superSecret.position) {
+          case 'top':
+            if (!topAdjacent[0].type && !rightAdjacent[0].type && !leftAdjacent[0].type) state.rooms[superSecret.room.id].type = 'super';
+            break;
+          case 'right':
+            if (!topAdjacent[0].type && !rightAdjacent[0].type && !bottomAdjacent[0].type) state.rooms[superSecret.room.id].type = 'super';
+            break;
+          case 'bottom':
+            if (!bottomAdjacent[0].type && !rightAdjacent[0].type && !leftAdjacent[0].type) state.rooms[superSecret.room.id].type = 'super';
+            break;
+          case 'left':
+            if (!topAdjacent[0].type && !bottomAdjacent[0].type && !leftAdjacent[0].type) state.rooms[superSecret.room.id].type = 'super';
+            break;
+          default:
+        }
       });
     },
   },

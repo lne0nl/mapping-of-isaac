@@ -46,5 +46,5 @@ npm run deploy
 
 - [ ] Build the map gradually when user add a room
 - [x] Calculate secret room position when user add a room
-- [ ] Implement super secret room calculation
+- [x] Implement super secret room calculation
 - [ ] Remove rooms modal and replace it with drag&drop

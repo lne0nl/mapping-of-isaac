@@ -1,5 +1,6 @@
 <template>
   <div class="room" :id="id" v-memo="[type, obstacles]" :data-type="type">
+    <div class="cypress-test">{{ id }}</div>
     <img v-if="type" :src="require(`@/assets/rooms/${type}.png`)" />
     <div class="obstacles" v-if="obstacles.length">
       <div v-for="obstacle in obstacles" :key="obstacle" :class="`obstacle obstacle-${obstacle}`">
@@ -89,5 +90,15 @@ export default {
     height: 86%;
     transform: translateY(-50%);
   }
+}
+
+.cypress-test {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  color: white;
+  opacity: 0.2;
 }
 </style>
