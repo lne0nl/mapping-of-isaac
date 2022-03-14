@@ -1,5 +1,6 @@
 import { createStore } from 'vuex';
 
+// Build floor.
 const rooms = [];
 let x = 0;
 let y = 0;
